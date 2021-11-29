@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %} 
+        <div class = "container text-center">
+            <h1>Список користувачів</h1>
+            {% if flag == True %}
+            <!--<table class = "container text-center" border = "1" style = "border: 1px solid black;">-->
+                <div class = "row-inline">
+                    <div class = "col-md-6 bg-primary text-center" style = "padding-top: 3px; padding-bottom: 3px; border: 1px solid blue;">
+                        <b>Ім'я користувача</b>
+                    </div>
+                    <div class = "col-md-6 bg-primary text-center" style = "padding-top: 3px; padding-bottom: 3px; border: 1px solid blue;">
+                        <b>Електронна пошта</b>
+                    </div>
+                </div>
+                    {% for user in all_users %}
+                        <div class = "row-inline">
+                            <div class = "col-md-6 bg-info text-center" style = "padding-top: 3px; padding-bottom: 3px; border: 1px solid blue;">{{ user.username }}</div>
+                            <div class = "col-md-6 bg-success text-center" style = "padding-top: 3px; padding-bottom: 3px; border: 1px solid blue;">{{ user.email }}</div>  
+                        </div> 
+                    {% endfor %}
+            </table>
+            {% endif %}
+            {{ flash_message() }}
+ {% endblock %}

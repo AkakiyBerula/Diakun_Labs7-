@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %} 
+        <div class = "container">
+            <h1 class = "text-center">Join Today</h1>
+            <form method="POST" action="{{ url_for('register')}}">
+                {{ form.csrf_token }}
+                {{ render_field_group( form.username ) }}
+                {{ render_field_group( form.email ) }}
+                {{ render_field_group( form.password ) }}
+                {{ render_field_group( form.confirm_password) }}
+                {{ form.submit(class_ ="btn btn-success", style = "margin-top: 20px;") }}
+                {{ flash_message() }}
+            </form>
+{% endblock %}

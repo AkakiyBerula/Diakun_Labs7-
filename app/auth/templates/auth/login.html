@@ -5,7 +5,7 @@
 {% block content %} 
         <div class = "container" style="width: 50%; margin-left: 25%">
             <h1 class = "text-center">Log In!</h1>
-            <form method="POST" action="{{ url_for('login')}}">
+            <form method="POST" action="{{ url_for('auth.login')}}">
                 {{ form.csrf_token }}
                 {{ render_field_group( form.email ) }}
                 {{ render_field_group( form.password ) }}

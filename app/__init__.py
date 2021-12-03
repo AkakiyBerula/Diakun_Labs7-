@@ -5,8 +5,8 @@ from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-
-from sqlalchemy import MetaData 
+from flask_wtf.csrf import CSRFProtect
+from config import config
 
 convention={
     "ix": 'ix_%(column_0_label)s',
@@ -18,21 +18,38 @@ convention={
 
 metadata = MetaData( naming_convention = convention) 
 
-app = Flask(__name__)
-app.config.from_object('config')
-
-db=SQLAlchemy(metadata=metadata)
-migrate = Migrate(app,db,render_as_batch=True)
-bootstrap = Bootstrap(app)
-db.init_app(app)
-bcrypt = Bcrypt(app)
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+db = SQLAlchemy()
+migrate = Migrate(db)
+bootstrap = Bootstrap()
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
 login_manager.login_message_category = "info"
+bcrypt = Bcrypt()
 
-def create_app():
+
+
+def create_app(config_name):
+    """Construct the core application."""
+    app = Flask(__name__)
+    app.config.from_object(config.get(config_name))
+    app.config["SECRET_KEY"] = 'secretkey'
     db.init_app(app)
-    migrate.init_app(app, db)
-    return app
+    migrate.init_app(app,db,render_as_batch=True)
+    bootstrap.init_app(app)
+    login_manager.init_app(app)
+    bcrypt.init_app(app)
+    with app.app_context():
+        # Imports
+        from . import views
 
-from . import views, models
+        from .auth import auth_blueprint
+        app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
+
+        from .form_cabinet import form_cabinet_blueprint
+        app.register_blueprint(form_cabinet_blueprint, url_prefix='/form_cabinet')
+
+        # Create tables for our models
+        db.create_all()
+
+        return app

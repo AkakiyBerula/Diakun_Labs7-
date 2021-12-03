@@ -1,0 +1,24 @@
+{% macro render_field(field) %}
+<div class = "form-inline form-group row ">
+    {{ field.label(for = field.name, class_=("col-form-label "+kwargs['class_label']), style="color: rgb(66, 66, 150);") }}
+    {{ field(class_=("form-control "+kwargs['class_label'])) }}
+    <ul class = "invalid-feedback errors">
+        {% for error in field.errors %}
+            <li style="color: red"> {{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endmacro %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class ="container mt-4">
+            {% for category, message in messages %}
+            <div class = "alert alert-{{category}} alert-dismissible" role="alert">
+                <button type = "button" class = "close" data-dismiss="alert" aria-label="Close">
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}

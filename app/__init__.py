@@ -3,6 +3,8 @@ from sqlalchemy import MetaData
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 from sqlalchemy import MetaData 
 
@@ -21,9 +23,12 @@ app.config.from_object('config')
 
 db=SQLAlchemy(metadata=metadata)
 migrate = Migrate(app,db,render_as_batch=True)
-
 bootstrap = Bootstrap(app)
 db.init_app(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+login_manager.login_message_category = "info"
 
 def create_app():
     db.init_app(app)

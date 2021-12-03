@@ -3,7 +3,7 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %} 
-        <div class = "container">
+        <div class = "container" style="width: 50%; margin-left: 25%">
             <h1 class = "text-center">Log In!</h1>
             <form method="POST" action="{{ url_for('login')}}">
                 {{ form.csrf_token }}
@@ -13,4 +13,5 @@
                 {{ form.submit(class_ ="btn btn-outline btn-primary", style = "margin-top: 10px;") }}
                 {{ flash_message() }}
             </form>
+        </div>
 {% endblock %}

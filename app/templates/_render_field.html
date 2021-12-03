@@ -1,5 +1,5 @@
 {% macro render_field_group(field) %}
-<div class = "form-group ">
+<div class = "form-outline mb-4">
     {{ field.label(style = "margin-top: 20px;") }}
     {{ field(class_="form-control col-xs-3") }}
     <div style = "background-color: rgba(212, 0, 0, 0.3); padding-top: 5px">
@@ -20,7 +20,7 @@
 {% macro flash_message() %} 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <div class ="container mt-4" style = "padding-top: 10px;">
+            <div class ="container mt-4" style = "width: 100%; padding-top: 10px;">
                 {% for category, message in messages %}
                     <div class = "alert alert-{{category}} alert-dismissible" role="alert">
                         {{ message }}

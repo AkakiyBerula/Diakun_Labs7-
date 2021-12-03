@@ -3,10 +3,9 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %} 
-        <div class = "container text-center">
+        <div class = "container text-center" style="width: 40%; margin-left: 30%">
             <h1>Список користувачів</h1>
             {% if flag == True %}
-            <!--<table class = "container text-center" border = "1" style = "border: 1px solid black;">-->
                 <div class = "row-inline">
                     <div class = "col-md-6 bg-primary text-center" style = "padding-top: 3px; padding-bottom: 3px; border: 1px solid blue;">
                         <b>Ім'я користувача</b>
@@ -21,7 +20,7 @@
                             <div class = "col-md-6 bg-success text-center" style = "padding-top: 3px; padding-bottom: 3px; border: 1px solid blue;">{{ user.email }}</div>  
                         </div> 
                     {% endfor %}
-            </table>
+        </div>
             {% endif %}
-            {{ flash_message() }}
+            <div class = "container" style="width: 40%; margin-left: 30%">{{ flash_message() }}</div>
  {% endblock %}

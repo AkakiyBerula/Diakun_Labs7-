@@ -1,14 +1,23 @@
-<nav class="navbar navbar-primary bg-light">
+<nav class="navbar navbar-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Diakun database</a>
         <div class="nav">
-            <ul class="nav nav-pills nav-fill">
+            <ul class="nav nav-pills">
+                {% if current_user.is_authenticated  %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('account')}}">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+                </li>
+                {% else %}
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{url_for('login')}}">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url_for('register')}}">Register</a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
                    <a class="nav-link" href="{{url_for('users')}}">User</a>
                 </li>

@@ -14,7 +14,7 @@ def users():
     if len(all_users) == 0:
         flash("Користувачі відсутні у базі даних.", category= "warning")
         flag = False
-    return render_template('auth/users.html', all_users = all_users, title = "Users", flag = flag)
+    return render_template('users.html', all_users = all_users, title = "Users", flag = flag)
 
 @auth_blueprint.route("/register", methods = ['GET', 'POST'])
 def register():
@@ -31,7 +31,7 @@ def register():
         db.session.commit()
         flash(f'Створено аккаунт для користувача {form.username.data}!', category = 'success')
         return redirect(url_for('auth.login'))
-    return render_template('auth/register.html', form=form, title = 'Register')
+    return render_template('register.html', form=form, title = 'Register')
 
 @auth_blueprint.route("/login", methods = ['GET', 'POST'])
 def login():
@@ -51,7 +51,7 @@ def login():
             login_user(dataEmail, remember=form.remember.data)
             flash("Авторизація пройшла успішно!", category = 'success')
             return redirect(url_for('auth.login'))
-    return render_template('auth/login.html', form=form, title='Login')
+    return render_template('login.html', form=form, title='Login')
 
 @auth_blueprint.route("/logout")
 def logout():
@@ -62,4 +62,4 @@ def logout():
 @auth_blueprint.route("/account")
 @login_required
 def account():
-    return render_template("auth/account.html", title="account")
+    return render_template("account.html", title="account")

@@ -19,7 +19,7 @@ convention={
 metadata = MetaData( naming_convention = convention) 
 
 db = SQLAlchemy()
-migrate = Migrate(db)
+#migrate = Migrate(db)
 bootstrap = Bootstrap()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -31,10 +31,11 @@ bcrypt = Bcrypt()
 def create_app(config_name):
     """Construct the core application."""
     app = Flask(__name__)
-    app.config.from_object(config.get(config_name))
-    app.config["SECRET_KEY"] = 'secretkey'
+    app.config.from_object(config.get(config_name or 'default'))
+    print(app.config["SECRET_KEY"])
+    #app.config["SECRET_KEY"] = 'secretkey'
     db.init_app(app)
-    migrate.init_app(app,db,render_as_batch=True)
+    #migrate.init_app(app,db,render_as_batch=True)
     bootstrap.init_app(app)
     login_manager.init_app(app)
     bcrypt.init_app(app)

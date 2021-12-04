@@ -15,7 +15,6 @@ class DevConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
     WTF_CSRF_ENABLED = True
-    #SECRET_KEY = "secretkey"
     SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI') or \
                               'sqlite:///' + os.path.join(basedir, 'site.db')
 

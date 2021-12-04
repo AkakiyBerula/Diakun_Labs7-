@@ -35,8 +35,6 @@ def basic_form():
         flash('Дані занесені успішно!')
         flash('The username is ' + form.username.data + ". The password is " + form.password.name + "!")
         return redirect(url_for('form_cabinet.basic_form'))
-    else:
-        flash('Помилка занесення даних!')
     return render_template('basic_form.html', form=form)
 
 @form_cabinet_blueprint.route('/form_cabinet', methods=['GET', 'POST'])

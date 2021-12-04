@@ -19,7 +19,6 @@ def users():
 @auth_blueprint.route("/register", methods = ['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        flash("Ви авторизовані на сайті", category="warning")
         return redirect(url_for('account'))
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -36,7 +35,6 @@ def register():
 @auth_blueprint.route("/login", methods = ['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        flash("Ви авторизовані на сайті", category="warning")
         return redirect(url_for('auth.account'))
     form = LoginForm()
     if form.validate_on_submit():

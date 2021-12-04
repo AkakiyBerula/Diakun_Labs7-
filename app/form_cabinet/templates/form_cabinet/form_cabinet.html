@@ -1,7 +1,8 @@
-{% from "_render_field_lab5_6.html" import render_field %}
 {% extends 'base.html' %}
 
 {% block title %} {{ title }} {% endblock %}
+
+{% from "_render_field.html" import render_field_cabinet_form, flash_message %}
 
 {% block content %} 
         <span class = "text-center" style="color: rgb(66, 66, 150);">
@@ -11,20 +12,21 @@
             <form method="POST" action="{{ url_for('form_cabinet.form_cabinet')}}">
                 {{ form.csrf_token }}
                 
-                {{ render_field( form.login, class_label="col-sm-3" )}}
-                {{ render_field( form.password, class_label="col-sm-3" )}}
-                {{ render_field( form.confirm_password, class_label="col-sm-3" )}}
+                {{ render_field_cabinet_form( form.login, class_label="col-sm-3" )}}
+                {{ render_field_cabinet_form( form.password, class_label="col-sm-3" )}}
+                {{ render_field_cabinet_form( form.confirm_password, class_label="col-sm-3" )}}
 
                 <h3 style="color: rgb(66, 66, 150);">Екзаменаційний лист (сертифікат) ЗНО магістра</h3> 
-                {{ render_field( form.number, class_label="col-sm-2" )}}
-                {{ render_field( form.pin, class_label="col-sm-2" )}}
-                {{ render_field( form.year, class_label="col-sm-2" )}}
+                {{ render_field_cabinet_form( form.number, class_label="col-sm-2" )}}
+                {{ render_field_cabinet_form( form.pin, class_label="col-sm-2" )}}
+                {{ render_field_cabinet_form( form.year, class_label="col-sm-2" )}}
                 
                 <h3 style="color: rgb(66, 66, 150);">Документ про освіту</h3>
-                {{ render_field( form.diplom_serial, class_label="col-sm-3" )}}
-                {{ render_field( form.diplom_number, class_label="col-sm-3" )}}
+                {{ render_field_cabinet_form( form.diplom_serial, class_label="col-sm-3" )}}
+                {{ render_field_cabinet_form( form.diplom_number, class_label="col-sm-3" )}}
 
                 <input type = "submit" value = "Зареєструвати" class="form-control btn btn-primary mb-2 float-right">
             </form>
+            {{ flash_message() }}
         </div>
 {% endblock %}

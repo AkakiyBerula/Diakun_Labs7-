@@ -8,6 +8,7 @@ from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
 from config import config
 
+
 convention={
     "ix": 'ix_%(column_0_label)s',
     "uq": "uq_%(table_name)s_%(column_0_name)s",
@@ -19,7 +20,7 @@ convention={
 metadata = MetaData( naming_convention = convention) 
 
 db = SQLAlchemy()
-#migrate = Migrate(db)
+migrate = Migrate(db)
 bootstrap = Bootstrap()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -28,14 +29,13 @@ bcrypt = Bcrypt()
 
 
 
-def create_app(config_name):
+def create_app(config_name="default"):
+    print(str(config_name))
     """Construct the core application."""
     app = Flask(__name__)
-    app.config.from_object(config.get(config_name or 'default'))
-    print(app.config["SECRET_KEY"])
-    #app.config["SECRET_KEY"] = 'secretkey'
+    app.config.from_object(config.get(config_name))
     db.init_app(app)
-    #migrate.init_app(app,db,render_as_batch=True)
+    migrate.init_app(app,db,render_as_batch=True)
     bootstrap.init_app(app)
     login_manager.init_app(app)
     bcrypt.init_app(app)
@@ -49,8 +49,5 @@ def create_app(config_name):
 
         from .form_cabinet import form_cabinet_blueprint
         app.register_blueprint(form_cabinet_blueprint, url_prefix='/form_cabinet')
-
-        # Create tables for our models
-        db.create_all()
 
         return app

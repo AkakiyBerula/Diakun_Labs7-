@@ -1,3 +1,14 @@
+{% macro render_field_basic_form(field) %}
+{{ field.label }}
+{{ field(**kwargs) | safe}}
+<ul>
+    {% for error in field.errors %}
+    <li style ="color: red;">{{error}}</li>
+    {% endfor %}
+</ul>
+{% endmacro %}
+
+
 {% macro render_field_group(field) %}
 <div class = "form-outline mb-4">
     {{ field.label(style = "margin-top: 20px;") }}
@@ -11,12 +22,28 @@
     </div>
 </div>
 {% endmacro %}
+
+
 {% macro render_field_check(field) %}
 <div class = "form-check">
     {{ field.label(class_ = "form-check-label", style = "margin-top: 20px;") }}
     {{ field(class_="form-check-input")}}
 </div>
 {% endmacro %}
+
+{% macro render_field_cabinet_form(field) %}
+<div class = "form-inline form-group row ">
+    {{ field.label(for = field.name, class_=("col-form-label "+kwargs['class_label']), style="color: rgb(66, 66, 150);") }}
+    {{ field(class_=("form-control "+kwargs['class_label'])) }}
+    <ul class = "invalid-feedback errors">
+        {% for error in field.errors %}
+            <li style="color: red"> {{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endmacro %}
+
+
 {% macro flash_message() %} 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

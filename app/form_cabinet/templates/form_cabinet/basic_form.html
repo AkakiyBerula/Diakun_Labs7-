@@ -1,15 +1,16 @@
-{% from "_render_field_lab4.html" import render_field %}
 {% extends 'base.html' %}
 
 {% block title %} {{ title }} {% endblock %}
+
+{% from "_render_field.html" import render_field_basic_form %}
 
 {% block content %} 
         <div class = "container text-center">
             <h1>Out form will be here!</h1>
             <form method="POST" action="{{ url_for('form_cabinet.basic_form')}}">
                 {{ form.csrf_token }}
-                {{ render_field(form.username)}}
-                {{ render_field(form.password)}}
+                {{ render_field_basic_form(form.username)}}
+                {{ render_field_basic_form(form.password)}}
                 <input type = "submit" value = "Submit">
             </form>
         </div>

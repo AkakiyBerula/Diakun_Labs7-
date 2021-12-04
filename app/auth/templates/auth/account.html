@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% from "_render_field.html" import flash_message %}
+
 {% block content %}
     <h1 class = "text-center">Hello, {{ current_user.username }}</h1>
     <div class = "container" style="width: 40%; margin-left: 30%">{{ flash_message() }}</div>

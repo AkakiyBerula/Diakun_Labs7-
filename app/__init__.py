@@ -19,8 +19,8 @@ convention={
 
 metadata = MetaData( naming_convention = convention) 
 
-db = SQLAlchemy()
-migrate = Migrate(db)
+db = SQLAlchemy(metadata=metadata)
+migrate = Migrate()
 bootstrap = Bootstrap()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -41,7 +41,8 @@ def create_app(config_name="default"):
     bcrypt.init_app(app)
     with app.app_context():
         # Imports
-        from . import views
+        from .main import main_blueprint
+        app.register_blueprint(main_blueprint, url_prefix='/')
 
         from .auth import auth_blueprint
         app.register_blueprint(auth_blueprint, url_prefix='/auth')

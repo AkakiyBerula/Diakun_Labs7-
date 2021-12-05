@@ -10,6 +10,12 @@ class Config(object):
     SECRET_KEY = environ.get('SECRET_KEY') or 'thesecretkey132'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+class TestConfig(Config):
+    DEVELOPMENT = True
+    DEBUG = True
+    WTF_CSRF_ENABLED = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'site.db')
+
 
 class DevConfig(Config):
     DEVELOPMENT = True
@@ -29,6 +35,7 @@ config = {
     'dev': DevConfig,
     'prod': ProdConfig,
     'default': DevConfig,
+    'test': TestConfig
 }
 
 """

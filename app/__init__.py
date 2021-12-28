@@ -54,4 +54,7 @@ def create_app(config_name="default"):
         from .contract_activities import contract_activities_blueprint
         app.register_blueprint(contract_activities_blueprint, url_prefix='/contract_activities')
 
+        from .post import posts_blueprint
+        app.register_blueprint(posts_blueprint, url_prefix='/posts')
+
         return app

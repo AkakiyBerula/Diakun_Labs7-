@@ -26,7 +26,7 @@
 
 {% macro render_field_check(field) %}
 <div class = "form-check">
-    {{ field.label(class_ = "form-check-label", style = "margin-top: 20px;") }}
+    {{ field.label(class_ = "form-check-label") }}
     {{ field(class_="form-check-input")}}
 </div>
 {% endmacro %}

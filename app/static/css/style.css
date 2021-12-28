@@ -18,3 +18,21 @@ textarea {
     border-radius: 10px;
     resize: none;
 }
+
+.my_block {
+    text-align: center;
+}
+.my_padding {
+    margin-top: 10px;
+}
+.main {
+    text-align: center;
+}
+.my_block img {
+    height: 40%;
+}
+
+.post-content {
+    padding-left: 7.5%;
+    padding-right: 7.5%;
+}

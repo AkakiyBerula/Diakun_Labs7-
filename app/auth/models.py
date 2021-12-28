@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     about_me = db.Column(db.Text, nullable=True)
 
     contracts = db.relationship('Contracts', backref='contracts_activities', lazy=True)
+    posts = db.relationship('Posts', backref='author', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"

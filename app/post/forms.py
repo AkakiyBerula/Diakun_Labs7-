@@ -8,6 +8,11 @@ class PostsForm(FlaskForm):
     title = StringField('Введіть заголовок поста', validators=[InputRequired(), Length(min=2, max=80)])
     text = TextAreaField('Введіть текст поста', validators=[Length(max=2500)])
     picture = FileField('Зображення поста', validators=[FileAllowed(['jpg', 'png'])])
-    type = SelectField('Оберіть тип категорії', choices=[('News', 'News'), ('Publication', 'Publication'), ('Other', 'Other')])
+    type = SelectField('Оберіть тип публікації', choices=[('News', 'News'), ('Publication', 'Publication'), ('Other', 'Other')])
+    category = SelectField(u'Оберіть категорію', coerce=int)
     enabled = BooleanField('Enabled')
     submit = SubmitField('Підтвердити')
+
+class CategoryPostForm(FlaskForm):
+    category_name = StringField('Ввести тип категорії', validators=[DataRequired(message="Це поле обов'язкове"), Length(min=0, max=40)])
+    submit = SubmitField('Виконати')

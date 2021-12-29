@@ -9,7 +9,7 @@
             <img src="{{ url_for('static', filename='posts_pics/' + post.image_file)  }}">
             <div class="media-body">
                 <h2 class="account-heading"> {{ post.title }} </h2>
-                <p class="text-secondary"> Категорія: {{ post.type.value }} </p>
+                <p class="text-secondary"> Категорія поста: {{ category_name.name }} </p>
                 <p class="text-secondary">Дата створення поста: {{ post.created.strftime('%d %B %Y - %H:%M:%S') }}</p>
             </div>
         </div>
@@ -22,7 +22,7 @@
 
                 <div class="d-flex flex-row align-items-start mb-4">
                     <div class="form-outline flex-fill mb-0">
-                        Категорія: {{ post.type.value }}
+                        Тип: {{ post.type.value }}
                     </div>
                 </div>
                 {% if post.user_id == current_user.id %}
@@ -31,12 +31,12 @@
                         <a href="{{url_for('posts.edit_post', id = post.id)}}" class="btn btn-warning btn-xs">Edit</a>
                         <a href="{{url_for('posts.delete_post', id = post.id)}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
                         {% else %}
-                            <h5 style="color: red;">Це не ваш договір. Редагування чи видалення неможливе.</h5>
+                            <h5 style="color: red;">Це не ваш пост. Редагування чи видалення неможливе.</h5>
                         
-                        </div>
+                        
                     {% endif %}
                     <a href="{{ url_for('posts.view_posts', id = current_user.id) }}">
-                        <p class="btn btn-primary btn-xs">Back</p>
+                        <p class="btn btn-primary btn-xs" style = "margin-top: 17px">Back</p>
                     </a>
                 </div>
             </div>

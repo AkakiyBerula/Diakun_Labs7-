@@ -5,23 +5,30 @@
 {% from "_render_field.html" import flash_message %}
 
 {% block content %} 
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
         <div class = "container text-center" style="width: 40%; margin-left: 30%">
             <h1>Список користувачів</h1>
             {% if flag == True %}
-                <div class = "row-inline">
-                    <div class = "col-md-6 bg-primary text-center" style = "padding-top: 3px; padding-bottom: 3px; border: 1px solid blue;">
-                        <b>Ім'я користувача</b>
-                    </div>
-                    <div class = "col-md-6 bg-primary text-center" style = "padding-top: 3px; padding-bottom: 3px; border: 1px solid blue;">
-                        <b>Електронна пошта</b>
-                    </div>
-                </div>
+                <table>
+                    <tr>
+                        <th>
+                            <b>Ім'я користувача</b>
+                        </th>
+                        <th>
+                            <b>Електронна пошта</b>
+                        </th>
+                    </tr>
                     {% for user in all_users %}
-                        <div class = "row-inline">
-                            <div class = "col-md-6 bg-info text-center" style = "padding-top: 3px; padding-bottom: 3px; border: 1px solid blue;">{{ user.username }}</div>
-                            <div class = "col-md-6 bg-success text-center" style = "padding-top: 3px; padding-bottom: 3px; border: 1px solid blue;">{{ user.email }}</div>  
-                        </div> 
+                    <tr>
+                        <td>
+                            {{ user.username }}
+                        </td>
+                        <td>
+                            {{ user.email }}
+                        </td> 
+                    </tr>
                     {% endfor %}
+                </table>
         </div>
             {% endif %}
             <div class = "container" style="width: 40%; margin-left: 30%">{{ flash_message() }}</div>

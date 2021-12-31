@@ -1,0 +1,31 @@
+{% from "_render_field.html" import render_field %}
+{% extends 'base.html' %}
+{% block content %}
+<div class = "container">
+        <div class="text-center">
+            <p>Договір {{ contract.contract_code }}</p>
+            <hr>
+            <p>Назва організації: {{ contract.organization_name }}</p>
+            <p>Термін виконання: {{ contract.deadline.strftime('%B %d %Y') }}</p>
+            <p>Вартість договору: {{ contract.contract_amount }}</p>
+            <p>Тип категорії: {{ contract_type.type }}</p>
+        </div>
+        <div class="buttons text-center">
+            {% if current_user.id == contract.user_id %}
+            <a href = "{{ url_for('contracts.delete_contract', id = contract.id)}}"">
+            <button type="button" class="btn btn-danger">
+                Delete
+            </button></a>
+            <a href="{{ url_for('contracts.edit_contract', id = contract.id) }}"> <!-- edit !-->
+                <button class="btn btn-warning">Edit</button>
+            </a>
+            {% else %}
+                <h5 style="color: red;">Це не ваш договір. Редагування чи видалення неможливе.</h5>
+            {% endif %}
+            <a href="{{ url_for('contracts.view_contract_info', id = contract.id) }}"> <!-- edit !-->
+                <button class="btn btn-primary">Back</button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

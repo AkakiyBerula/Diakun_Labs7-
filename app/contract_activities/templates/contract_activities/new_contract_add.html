@@ -1,0 +1,25 @@
+{% from "_render_field.html" import render_field %}
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% from "_render_field.html" import render_field_group, render_field_check, flash_message %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    <div class="container", style="margin-left: 30%; width: 40%;">
+        <div>
+            {{ render_field_group(form.organization_name) }}
+            {{ render_field_group(form.contract_code) }}
+            {{ render_field_group(form.deadline) }}
+            {{ render_field_group(form.contract_amount) }}
+            {{ render_field_group(form.contract_type) }}
+            {{ form.submit(class_ ="btn btn-success", style = "margin-top: 20px;") }}
+            {{ flash_message() }}
+            <a href="{{url_for('contracts.view_contract_info')}}" class="btn btn-primary btn-xs" style = "margin-top: 20px; margin-left: 10px;">Назад</a>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

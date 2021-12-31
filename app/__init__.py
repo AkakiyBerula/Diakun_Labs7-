@@ -51,4 +51,7 @@ def create_app(config_name="default"):
         from .form_cabinet import form_cabinet_blueprint
         app.register_blueprint(form_cabinet_blueprint, url_prefix='/form_cabinet')
 
+        from .contract_activities import contract_activities_blueprint
+        app.register_blueprint(contract_activities_blueprint, url_prefix='/contract_activities')
+
         return app

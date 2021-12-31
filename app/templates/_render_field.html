@@ -3,7 +3,7 @@
 {{ field(**kwargs) | safe}}
 <ul>
     {% for error in field.errors %}
-    <li style ="color: red;">{{error}}</li>
+    <p style ="color: red;">{{error}}</p>
     {% endfor %}
 </ul>
 {% endmacro %}
@@ -11,9 +11,9 @@
 
 {% macro render_field_group(field) %}
 <div class = "form-outline mb-4">
-    {{ field.label(style = "margin-top: 20px;") }}
+    {{ field.label() }}
     {{ field(class_="form-control col-xs-3") }}
-    <div style = "background-color: rgba(212, 0, 0, 0.3); padding-top: 5px">
+    <div>
         <ul>
             {% for error in field.errors %}
                 <p style="color: red;">{{error}}</p>
@@ -35,11 +35,13 @@
 <div class = "form-inline form-group row ">
     {{ field.label(for = field.name, class_=("col-form-label "+kwargs['class_label']), style="color: rgb(66, 66, 150);") }}
     {{ field(class_=("form-control "+kwargs['class_label'])) }}
-    <ul class = "invalid-feedback errors">
+    <div class = "invalid-feedback-errors">
+    
         {% for error in field.errors %}
-            <li style="color: red"> {{ error }}</li>
+            <p style="color: red"> {{ error }}</li>
         {% endfor %}
-    </ul>
+    
+    </div>
 </div>
 {% endmacro %}
 
@@ -51,8 +53,6 @@
                 {% for category, message in messages %}
                     <div class = "alert alert-{{category}} alert-dismissible" role="alert">
                         {{ message }}
-                        <button type = "button" class = "close" data-dismiss="alert" aria-label="Close">
-                        </button>
                     </div>
                 {% endfor %}
             </div>

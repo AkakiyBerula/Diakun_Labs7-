@@ -20,7 +20,7 @@ def protected(f):
     return decorated
 
 
-@api_blueprint.route('/categories', methods=['GET'])
+@api_blueprint.route('/category', methods=['GET'])
 @protected
 def get_categories():
     categories = Category.query.all()
@@ -38,14 +38,14 @@ def get_category(id):
 
 @api_blueprint.route('/category', methods=['POST'])
 def add_category():
-    new_category = request.args.get('name')
+    new_category = request.get_json()
     print(new_category)
-    category = Category.query.filter_by(name=new_category).first()
+    category = Category.query.filter_by(name = new_category['name']).first()
 
     if category:
         return jsonify({"Message": "Category has already existed!"})
 
-    category = Category(name = new_category)
+    category = Category(name = new_category['name'])
     db.session.add(category)
     db.session.commit()
     return jsonify({"id": category.id, "name": category.name})
@@ -58,12 +58,12 @@ def edit_category(id):
     if not category:
         return jsonify({"Message": "Category doesn't exist!"})
 
-    update_category = request.args.get('name')
-    categories = Category.query.filter_by(name=update_category).first()
+    update_category = request.get_json()
+    categories = Category.query.filter_by(name=update_category['name']).first()
     if categories:
         return jsonify({"Message": "Category has already existed!"})
 
-    category.name = update_category
+    category.name = update_category['name']
     db.session.add(category)
     db.session.commit()
 

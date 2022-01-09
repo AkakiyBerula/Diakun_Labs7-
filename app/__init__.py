@@ -57,4 +57,7 @@ def create_app(config_name="default"):
         from .post import posts_blueprint
         app.register_blueprint(posts_blueprint, url_prefix='/posts')
 
+        from .api import api_blueprint
+        app.register_blueprint(api_blueprint, url_prefix='/api')
+
         return app

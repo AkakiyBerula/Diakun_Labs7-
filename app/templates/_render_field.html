@@ -1,8 +1,19 @@
+{% macro render_field_basic_form(field) %}
+{{ field.label }}
+{{ field(**kwargs) | safe}}
+<ul>
+    {% for error in field.errors %}
+    <p style ="color: red;">{{error}}</p>
+    {% endfor %}
+</ul>
+{% endmacro %}
+
+
 {% macro render_field_group(field) %}
-<div class = "form-group ">
-    {{ field.label(style = "margin-top: 20px;") }}
+<div class = "form-outline mb-4">
+    {{ field.label() }}
     {{ field(class_="form-control col-xs-3") }}
-    <div style = "background-color: rgba(212, 0, 0, 0.3); padding-top: 5px">
+    <div>
         <ul>
             {% for error in field.errors %}
                 <p style="color: red;">{{error}}</p>
@@ -11,21 +22,37 @@
     </div>
 </div>
 {% endmacro %}
+
+
 {% macro render_field_check(field) %}
 <div class = "form-check">
-    {{ field.label(class_ = "form-check-label", style = "margin-top: 20px;") }}
+    {{ field.label(class_ = "form-check-label") }}
     {{ field(class_="form-check-input")}}
 </div>
 {% endmacro %}
+
+{% macro render_field_cabinet_form(field) %}
+<div class = "form-inline form-group row ">
+    {{ field.label(for = field.name, class_=("col-form-label "+kwargs['class_label']), style="color: rgb(66, 66, 150);") }}
+    {{ field(class_=("form-control "+kwargs['class_label'])) }}
+    <div class = "invalid-feedback-errors">
+    
+        {% for error in field.errors %}
+            <p style="color: red"> {{ error }}</li>
+        {% endfor %}
+    
+    </div>
+</div>
+{% endmacro %}
+
+
 {% macro flash_message() %} 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <div class ="container mt-4" style = "padding-top: 10px;">
+            <div class ="container mt-4" style = "width: 100%; padding-top: 10px;">
                 {% for category, message in messages %}
                     <div class = "alert alert-{{category}} alert-dismissible" role="alert">
                         {{ message }}
-                        <button type = "button" class = "close" data-dismiss="alert" aria-label="Close">
-                        </button>
                     </div>
                 {% endfor %}
             </div>

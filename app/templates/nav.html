@@ -1,16 +1,52 @@
-<nav class="navbar navbar-primary bg-light">
+<nav class="navbar navbar-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Diakun database</a>
         <div class="nav">
-            <ul class="nav nav-pills nav-fill">
+            <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{url_for('login')}}">Login</a>
+                    <a class="nav-link" aria-current="page" href="{{url_for('main.index')}}">Main Page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('register')}}">Register</a>
+                    <a class="nav-link" aria-current="page" href="{{url_for('main.if_statement')}}">If</a>
                 </li>
                 <li class="nav-item">
-                   <a class="nav-link" href="{{url_for('users')}}">User</a>
+                    <a class="nav-link" aria-current="page" href="{{url_for('main.for_cycle')}}">For</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url_for('form_cabinet.basic_form')}}">Basic Form</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url_for('form_cabinet.form_cabinet')}}">Cabinet Form</a>
+                </li>
+                {% if current_user.is_authenticated  %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url_for('auth.account')}}">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url_for('posts.view_posts')}}">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url_for('posts.categories_list')}}">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url_for('contracts.view_contract_info')}}">Contracts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url_for('contracts.contract_types_info')}}">Contract Types</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url_for('auth.login')}}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('auth.register')}}">Register</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                   <a class="nav-link" href="{{url_for('auth.users')}}">Users</a>
                 </li>
             </ul>
         </div>

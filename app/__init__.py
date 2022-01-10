@@ -39,6 +39,7 @@ def create_app(config_name="default"):
     bootstrap.init_app(app)
     login_manager.init_app(app)
     bcrypt.init_app(app)
+    #api = Api(app)
     with app.app_context():
         # Imports
         from .main import main_blueprint
@@ -59,5 +60,11 @@ def create_app(config_name="default"):
 
         from .api import api_blueprint
         app.register_blueprint(api_blueprint, url_prefix='/api')
+        
+        from .api_v2 import api_v2_blueprint 
+        app.register_blueprint(api_v2_blueprint, url_prefix='/api/v2')
 
+        from .ekz import api_ekz_blueprint
+        app.register_blueprint(api_ekz_blueprint, url_prefix='/api/diakun')
+        
         return app
